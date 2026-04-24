@@ -1,113 +1,50 @@
-# Salesforce CRM Data Quality & Migration Toolkit
+# Salesforce CRM Data Toolkit
 
-A Python-based toolkit for automating **Salesforce CRM data cleansing, deduplication, validation, and bulk migration** using the Salesforce REST API and Bulk API 2.0.
+## Overview
+This project is a simple toolkit to handle common Salesforce data issues like duplicates, missing fields, and data cleaning.
 
----
-
-## Why This Project Exists
-
-Managing data quality in enterprise Salesforce orgs (like Intel's Consolidated Platform) is a recurring challenge. Duplicate records, missing required fields, and stale CRM data corrupt dashboards, break integrations, and reduce CRM adoption. This toolkit automates the full **data quality governance lifecycle** — from audit to cleanse to migrate — reducing CRM data errors by **40%+**.
+It uses Python scripts to process CSV data and simulate how data can be prepared before uploading into Salesforce.
 
 ---
 
-## What It Does
+## Why I Built This
+In Salesforce projects, data quality is very important. Poor data leads to incorrect reports and business decisions.
 
-| Feature | Description |
-|---|---|
-| **Data Audit** | Scans Salesforce objects (Contacts, Accounts, Leads) for missing fields, invalid formats |
-| **Deduplication** | Detects and flags duplicate records using fuzzy matching on name + email |
-| **Field Validation** | Enforces business rules (email regex, phone format, required fields) |
-| **Bulk Migration** | Migrates data via Salesforce Bulk API 2.0 with rollback support |
-| **Audit Logging** | Logs every change with before/after values for full traceability |
-| **Sandbox-Safe** | Dry-run mode to test against sandbox before production deployment |
+This project demonstrates:
+- Data cleaning
+- Duplicate detection
+- Basic validation
 
 ---
 
-## Tech Stack
+## Features
+- Identify missing values in records
+- Clean and standardize data
+- Detect duplicate records using simple matching
+- Prepare data for migration
 
-- **Python 3.10+**
-- **simple-salesforce** — Salesforce REST + Bulk API client
-- **pandas** — Data manipulation and CSV processing
-- **rapidfuzz** — Fuzzy matching for deduplication
-- **FastAPI** — Optional REST interface
-- **python-dotenv** — Environment config
+---
+
+## Tech Used
+- Python
+- Pandas (for data processing)
+- CSV files (to simulate Salesforce data)
 
 ---
 
 ## Project Structure
-
-```
-sf-crm-data-toolkit/
-├── src/
-│   ├── config.py          # Salesforce credentials & settings
-│   ├── auditor.py         # Data audit & missing field detection
-│   ├── cleaner.py         # Data cleansing & normalization
-│   ├── deduplicator.py    # Fuzzy-match deduplication engine
-│   ├── migrator.py        # Bulk API migration with rollback
-│   └── main.py            # CLI entry point
-├── sample_data/
-│   └── sample_contacts.csv
-├── requirements.txt
-├── .env.example
-└── README.md
-```
+- `src/` → Python scripts
+- `sample_data/` → Sample CSV data
+- `requirements.txt` → Dependencies
 
 ---
 
-## Setup
+## How to Run
+1. Install dependencies  
+2. Run Python scripts from src folder  
+3. Use sample CSV for testing  
 
-```bash
-git clone https://github.com/alisha18das/sf-crm-data-toolkit.git
-cd sf-crm-data-toolkit
-python -m venv venv && source venv/bin/activate
-pip install -r requirements.txt
-cp .env.example .env   # Fill in your SF credentials
-```
+---
 
-## Usage
-
-```bash
-# Audit object for data issues (read-only)
-python src/main.py --mode audit --object Contact
-
-# Cleanse and normalize records
-python src/main.py --mode cleanse --object Contact
-
-# Find and flag duplicates (threshold 0-100)
-python src/main.py --mode deduplicate --object Contact --threshold 85
-
-# Migrate records from CSV via Bulk API
-python src/main.py --mode migrate --object Contact --file sample_data/sample_contacts.csv
-```
-
-## Sample Output
-
-```
-[AUDIT] Contact → 15,247 records scanned
-  Missing Email:        312 (2.0%)
-  Invalid Phone:         87 (0.6%)
-  Duplicate suspects:   204 (1.3%)
-
-[CLEAN] Normalized 15,247 records
-  Title-cased names:  15,247
-  Formatted phones:    1,340
-  Trimmed whitespace:  2,891
-
-[DEDUPE] Flagged 198 duplicate pairs (threshold: 85%)
-
-[MIGRATE] Upserted 15,100 records via Bulk API
-  Success: 15,097 | Failed: 3 | Rolled back: 3
-```
-
-## Environment Variables
-
-```env
-SF_USERNAME=your_sf_username@example.com
-SF_PASSWORD=your_sf_password
-SF_SECURITY_TOKEN=your_sf_security_token
-SF_DOMAIN=login        # use 'test' for sandbox
-DRY_RUN=true           # set false for live changes
-```
-
-## License
-MIT
+## Note
+This is a learning project to understand data processing and preparation for Salesforce systems.
