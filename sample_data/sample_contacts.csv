@@ -1,0 +1,6 @@
+Id,FirstName,LastName,Email,Phone,AccountId
+003Xx000001,john,DOE,John.Doe@Example.COM,  (91) 99671-53442  ,001Xx000001
+003Xx000002,JANE,smith,jane.smith@company.com,9876543210,001Xx000002
+003Xx000003,ravi,Kumar,RAVI.KUMAR@CORP.IN,+91-9988776655,001Xx000003
+003Xx000004,priya,,priya.verma@gmail.com,,001Xx000004
+003Xx000005,amit,Sharma,NOT_AN_EMAIL,123,001Xx000005
